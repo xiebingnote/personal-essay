@@ -1,4 +1,4 @@
-#!bin/bash
+#!/usr/bin/bash
 echo -e "---------------加载nsq服务---------------"
 sleep 1
 systemctl daemon-reload

@@ -220,7 +220,7 @@
 ### 3：启动Kinaba    
     进入Kibana\bin目录运行kibana.bat（等待时间较长）
 
-![kibana-1.png](kibana-1.png)
+![img.png](img.png)
 
     出现上图所示后Kibana就启动成功了
     在页面上访问http://localhost:5601即可访问Kibana界面

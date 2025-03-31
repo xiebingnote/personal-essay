@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 nsq_path=/usr/local/nsq
-#nsq_path=/root/nsq
 
 is_active_nsqlookupd=`systemctl is-active nsqlookupd`
 is_active_nsqd=`systemctl is-active nsqd`

@@ -1,4 +1,4 @@
-#!bin/bash
+#!/usr/bin/env bash
 nsq_tar_name="nsq-1.2.1.linux-amd64.go1.16.6.tar.gz"
 nsq_pk_name="nsq-1.2.1.linux-amd64.go1.16.6"
 nsq_path="/usr/local"
