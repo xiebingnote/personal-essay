@@ -1,0 +1,22 @@
+#节点名称
+node.name: name1
+
+#当前节点地址
+network.host: 172.16.20.23
+
+#发现主机地址,填写其他所有节点，不包含本机
+discovery.seed_hosts:
+  - 172.16.20.22
+  - 172.16.20.30
+
+#初始化集群节点，填写所有的节点，包含本机
+cluster.initial_master_nodes:
+  - name1
+  - name2
+  - name3
+
+#内部默认端口9300，如有需求，请自行更改
+transport.port: 9300
+
+#http端口，默认9200，如有需求，请自行更改
+http.port: 9200

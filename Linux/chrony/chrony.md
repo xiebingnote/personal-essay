@@ -3,9 +3,11 @@
 ## 安装步骤
 
 ### 1：安装命令
+
     yum install chrony -y
 
 ### 2：配置文件说明：
+
     # Use public servers from the pool.ntp.org project.
     # Please consider joining the pool (http://www.pool.ntp.org/join.html).
     # 配置NTP服务器
@@ -72,8 +74,8 @@
     # 该rtcfile指令定义中的文件名chronyd可以保存跟踪系统的实时时钟（RTC）的精度相关的参数。
     rtcfile /var/lib/chrony/rtc
 
-
 ### 3：配置服务端：
+
     选中一台服务器，编辑/etc/chrony.conf文件：
     vim /etc/chrony.conf
 
@@ -89,6 +91,7 @@
     chronyc sources –v
 
 ### 4：配置客户端
+
     剩余的服务器，编辑/etc/chrony.conf文件：
     vim /etc/chrony.conf
 
