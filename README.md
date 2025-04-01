@@ -1,10 +1,10 @@
 # github.com/xiebingnote/personal-essay
 
-    项目介绍：个人学习笔记、实践经验、踩坑记录，包含Linux、Docker、Git、Kafka、NSQ、MongoDB、MySQL、Nginx、PostgreSQL、Wireshark等相关知识。
+项目介绍：个人学习笔记、实践经验、踩坑记录，包含Linux、Docker、Git、Kafka、NSQ、MongoDB、MySQL、Nginx、PostgreSQL、Wireshark等相关知识。
 
-    项目地址：https://github.com/xiebingnote/personal-essay
+项目地址：https://github.com/xiebingnote/personal-essay
 
-    仅供参考学习，线上请谨慎使用！！！
+仅供参考学习，线上请谨慎使用！！！
 
 ## 1. 相关说明
 
