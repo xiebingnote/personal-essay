@@ -6,14 +6,20 @@
 
     1①　Elasticsearch安装依赖于JDK，首先检查系统是否安装了jdk:
     java -version
+
     ②　查找java相关得列表：yum -y list java*(如果没有yum命令的，网上百度，这个安装很简单)
+
     ③　到这一步之后，就继续安装jdk：yum -y install java-1.8.0-openjdk*。这个过程可能要持续几分钟的时间，跟自己的网速有一定的关系。
+
     ④　等到完成之后，检查jdk是否安装成功：java -version。(默认安装路径为：/usr/lib/jvm)
+
     ⑤　查看java安装路径：which java
+
     ⑥　JAVA配置 /etc/profile
     JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.292.b10-1.el7_9.x86_64
     export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
     export PATH=$PATH:$JAVA_HOME/bin
+
     ⑦　修改好/etc/profile配置文件使其立即生效ß
     命令：source /etc/profile
 
@@ -24,6 +30,7 @@
 ### 3．模块说明
 
     Elasticsearch：主要用于日志的写入和转发
+
     监听的端口：
     9300：elasticsearch监听TCP的默认端口
     9200：elasticsearch监听http的默认端口
@@ -34,8 +41,11 @@
 
     安装步骤如下：
     注：Ctrl + c 也是中断脚本执行，如有输入错误，Ctrl + ← 为删除输入内容，安装目录为：/usr/local目录下
+
     ①　上传elasticsearch的安装包和安装脚本，确保在同一目录下即可
+
     ②　执行脚本命令：sh install_poc_elasticsearch.sh
+
     ③　请根据提示输入相关内容：
     如下图所示，单机部署请输入ip地址，核对确认后无误后，如继续执行，输入Y，中断执行，输入N
 
@@ -69,6 +79,7 @@
     2)黄色：数据完整，但是没有完整的副本
 
     原因：单机部署时，无副本分片，unassigned_shards的值不为0时导致的
+
     解决方法：执行如下命令（替换对应的IP地址即可）：
     curl -X PUT "172.16.20.23:9200/_settings" -H 'Content-Type: application/json' -d' {"number_of_replicas":0}'
     绿色：一切正常，有完整的主版本和副本
@@ -96,6 +107,7 @@
 
     ①　切换到ES的安装目录/usr/local/elasticsearch目录中：
     命令：cd /usr/local/elasticsearch/
+
     ②　生成ca证书
     ./bin/elasticsearch-certgen
     输出内容如下：
@@ -111,8 +123,10 @@
     
     ④　在config文件家中创建cert文件夹
     命令：mkdir -p config/cert
+
     ⑤　把证书文件移动到config/cert中
     命令：cp ca/* my-es/* config/cert
+
     ⑥　更改cert文件夹所属用户（此步骤很重要！！！如不修改，可能会导致无法正常访问ES）
     chown -R es:es config/cert
 
@@ -144,8 +158,10 @@
     设置密码,可以根据自己情况生成密码，
     使用的auto，生成随机密码
     cd /usr/local/elasticsearch/bin
+
     生成随机密码
     ./elasticsearch-setup-passwords auto
+
     或手动设置密码
     ./elasticsearch-setup-passwords interactive
 

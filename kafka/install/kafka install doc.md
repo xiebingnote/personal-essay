@@ -260,6 +260,7 @@
 ![img.png](image/img.png)
 
     原因：缺少myid文件
+
     解决方法如下：
     在kafka文件夹的路径中：
     mkdir zookeeper
@@ -272,4 +273,5 @@
 ![img_1.png](image/img_1.png)
 
     原因： myid文件中的写入的编号和走zookeeper中的设置server.X的X不一致
+
     解决方法：更改为一致即可

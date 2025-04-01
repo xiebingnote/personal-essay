@@ -31,6 +31,7 @@
 ![img_2.png](./image/img_2.png)
 
     ②　执行脚本命令：sh install_etcd.sh
+
     ③　根据提示输入相关内容，如下图所示，输入当前服务器的IP地址，核对确认后无误后，如继续执行，输入Y，中断执行，输入N
 
 ![img_3.png](./image/img_3.png)
@@ -88,6 +89,7 @@
 ![img_10.png](./image/img_10.png)
 
     ③　执行脚本命令：sh install_etcd_ssl.sh
+
     ④　根据提示输入相关内容，如下图所示，输入当前服务器的IP地址，核对确认后无误后，如继续执行，输入Y，中断执行，输入N
 
 ![img_11.png](./image/img_11.png)

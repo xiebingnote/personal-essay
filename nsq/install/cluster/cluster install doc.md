@@ -3,8 +3,10 @@
 ## 一、说明
 
     注意：多台机器进行进行部署时，所有机器必须进行时钟同步，例如三台网关服务器，需要将三台服务器进行时钟同步！！！（目前请手动执行时钟同步操作）
+
     以XShell为例：连接所有服务器，点击工具，发送键到所有会话输入如下命令即可（其他工具请自行查找类似功能）：
     命令：date -s 14:22:30 （设置服务器时为：14:22:30）
+
     需在每台机器上传安装包和安装脚本，安装脚本需在每台机器上执行！！！
 
 ### 1．说明
@@ -40,13 +42,17 @@
 
     安装步骤如下：
     注：Ctrl + c 为中断脚本执行，如有输入错误，Ctrl + ← 为删除输入内容
+
     ①　上传nsq安装包和安装脚本到root目录下，确保在同一文件夹内即可
+
     ②　修改nsqconfig文件，如下图所示：
 
 ![img-2.png](./image/img-2.png)
 
     多台服务器请自行添加-lookupd-tcp-address=172.16.20.30:4160，端口号根据实际情况更改，-broadcast-address=172.16.20.23的地址为当前服务器的地址，--lookupd-http-address=172.16.20.22:4161为页面管理平台的地址，端口号根据实际情况更改。
+
     ③　执行脚本命令：sh cluster_nsq.sh
+
     ④　请根据提示输入相关内容：
     输入当前服务的地址，确认是否执行，如下图所示：
 
@@ -56,7 +62,9 @@
     执行完脚本之后，出现如下内容代表安装成功：
 
 ![img-4.png](./image/img-4.png)
+
 ![img-5.png](./image/img-5.png)
+
 ![img-6.png](./image/img-6.png)
 
 ### (2)验证
@@ -110,6 +118,7 @@
     systemctl status nsqlookupd
     systemctl status nsqd
     systemctl status nsqadmin
+
     停止服务，请执行命令：
     systemctl stop nsqlookupd
     systemctl stop nsqd
@@ -148,17 +157,18 @@
 
 ![img-16.png](./image/img-16.png)
 
-    Country Name (2 letter code) []:CN                        // 输入国家代码，中国填写 CN
-    State or Province Name (full name) []:BeiJing             // 输入省份，这里填写 BeiJing
-    Locality Name (eg, city) []:BeiJing                       // 输入城市，这里填写 BeiJing
-    Organization Name (eg, company) []:BambooCloud                    // 输入组织机构(或公司名）
-    Organizational Unit Name (eg, section) []:BambooCloud             // 输入机构部门
-    Common Name (eg, fully qualified host name) []:*.bamboocloud.com  // 输入域名  
-    Email Address []:                      // 邮箱地址，可以不填写
+    Country Name (2 letter code) []:CN                                  // 输入国家代码，中国填写 CN
+    State or Province Name (full name) []:BeiJing                       // 输入省份，这里填写 BeiJing
+    Locality Name (eg, city) []:BeiJing                                 // 输入城市，这里填写 BeiJing
+    Organization Name (eg, company) []:BambooCloud                      // 输入组织机构(或公司名）
+    Organizational Unit Name (eg, section) []:BambooCloud               // 输入机构部门
+    Common Name (eg, fully qualified host name) []:*.bamboocloud.com    // 输入域名  
+    Email Address []:                                                   // 邮箱地址，可以不填写
 
 ##### ②　允许nsqd接受TLS升级请求：
 
     nsqd -tls-cert="cert.pem" -tls-key="privatekey.pem"
+
     注释：
     tls-cert：tls公钥文件（如不在证书目录下执行需填写具体路径）
     tls-key：tls私钥文件（如不在证书目录下执行需填写具体路径）
@@ -167,6 +177,7 @@
 #### 2.更改服务配置
 
     更改nsqd服务文件，路径为： /etc/systemd/system/nsqd.service
+
     在ExecStart行最后添加参数：-https-address=172.16.20.46:4152 -tls-cert=/root/openssl/cert.pem -tls-key=/root/openssl/privatekey.pem -tls-required=false
 
 ![img-17.png](./image/img-17.png)
@@ -175,6 +186,7 @@
 
     重新加载服务：
     systemctl daemon-reload
+
     重启所有服务：
     systemctl start nsqlookupd
     systemctl start nsqd

@@ -35,8 +35,11 @@
 
     安装步骤如下：
     注：Ctrl + c 为中断脚本执行，如有输入错误，Ctrl + ← 为删除输入内容
+
     ①　上传nsq安装包和安装脚本到root目录下，确保在同一文件夹内即可
+
     ②　执行脚本命令：sh install_poc_nsq.sh
+
     ③　请根据提示输入相关内容：
     如下图所示，单机部署请输入ip地址，核对确认后无误后，如继续执行，输入Y，中断执行，输入N
 
@@ -46,7 +49,9 @@
     执行完脚本之后，出现如下内容代表安装成功：
 
 ![img-3.png](image/img-3.png)
+
 ![img-4.png](image/img-4.png)
+
 ![img-5.png](image/img-5.png)
 
 ### (2)验证
@@ -67,6 +72,7 @@
 ![img-8.png](image/img-8.png)
 
     注：nsq的安装路径为：/usr/local目录下
+
     在另一个shell中切换到nsq的安装目录的bin目录下：
     cd /usr/local/nsq/bin/
 
@@ -77,8 +83,7 @@
 
     接收topic的文件为路径为：/root/nsqfile/testtopic.sag-ctos7-gate-8-172.2022-07-26_16.log
     
-    在另一个shell中查看/root/nsqfile/testtopic.sag-ctos7-gate-8-172.2022-07-26_16.log
-    文件，可以看到nsq成功接收了topic发送的内容：
+    在另一个shell中查看/root/nsqfile/testtopic.sag-ctos7-gate-8-172.2022-07-26_16.log 文件，可以看到nsq成功接收了topic发送的内容：
     tail -f /root/nsqfile/testtopic.sag-ctos7-gate-8-172.2022-07-26_16.log
 
 ![img-10.png](image/img-10.png)
@@ -102,6 +107,7 @@
     systemctl status nsqlookupd
     systemctl status nsqd
     systemctl status nsqadmin
+
     停止服务，请执行命令：
     systemctl stop nsqlookupd
     systemctl stop nsqd
@@ -140,17 +146,18 @@
 
 ![img-15.png](image/img-15.png)
 
-    Country Name (2 letter code) []:CN                        // 输入国家代码，中国填写 CN
-    State or Province Name (full name) []:BeiJing             // 输入省份，这里填写 BeiJing
-    Locality Name (eg, city) []:BeiJing                       // 输入城市，这里填写 BeiJing
-    Organization Name (eg, company) []:BambooCloud                    // 输入组织机构(或公司名）
-    Organizational Unit Name (eg, section) []:BambooCloud             // 输入机构部门
-    Common Name (eg, fully qualified host name) []:*.bamboocloud.com  // 输入域名  
-    Email Address []:                      // 邮箱地址，可以不填写
+    Country Name (2 letter code) []:CN                                  // 输入国家代码，中国填写 CN
+    State or Province Name (full name) []:BeiJing                       // 输入省份，这里填写 BeiJing
+    Locality Name (eg, city) []:BeiJing                                 // 输入城市，这里填写 BeiJing
+    Organization Name (eg, company) []:BambooCloud                      // 输入组织机构(或公司名）
+    Organizational Unit Name (eg, section) []:BambooCloud               // 输入机构部门
+    Common Name (eg, fully qualified host name) []:*.bamboocloud.com    // 输入域名  
+    Email Address []:                                                   // 邮箱地址，可以不填写
 
 ##### ②　允许nsqd接受TLS升级请求：
 
     nsqd -tls-cert="cert.pem" -tls-key="privatekey.pem"
+
     注释：
     tls-cert：tls公钥文件（如不在证书目录下执行需填写具体路径）
     tls-key：tls私钥文件（如不在证书目录下执行需填写具体路径）
@@ -167,6 +174,7 @@
 
     重新加载服务：
     systemctl daemon-reload
+
     重启所有服务：
     systemctl start nsqlookupd
     systemctl start nsqd
