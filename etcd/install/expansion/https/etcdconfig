@@ -1,0 +1,18 @@
+--name=etcd04 \
+--data-dir=/var/lib/etcd/data \
+--initial-advertise-peer-urls https://172.16.20.23:2380 \
+--listen-peer-urls https://172.16.20.23:2380 \
+--listen-client-urls https://172.16.20.23:2379,https://127.0.0.1:2379 \
+--advertise-client-urls https://172.16.20.23:2379 \
+--initial-cluster-token etcd-cluster \
+--initial-cluster etcd01=https://172.16.20.22:2380,etcd02=https://172.16.20.28:2380,etcd03=https://172.16.20.30:2380,etcd04=https://172.16.20.23:2380 \
+--initial-cluster-state existing \
+--initial-cluster-token etcd-cluster \
+--client-cert-auth \
+--trusted-ca-file=/opt/etcd/ssl/ca.crt \
+--cert-file=/opt/etcd/ssl/etcd.crt \
+--key-file=/opt/etcd/ssl/etcd.key \
+--peer-client-cert-auth \
+--peer-trusted-ca-file=/opt/etcd/ssl/ca.crt \
+--peer-cert-file=/opt/etcd/ssl/etcd.crt \
+--peer-key-file=/opt/etcd/ssl/etcd.key

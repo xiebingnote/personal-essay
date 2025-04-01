@@ -1,0 +1,9 @@
+--name=etcd04 \
+--data-dir=/var/lib/etcd/data \
+--initial-advertise-peer-urls http://172.16.20.23:2380 \
+--listen-peer-urls http://172.16.20.23:2380 \
+--listen-client-urls http://172.16.20.23:2379,http://127.0.0.1:2379 \
+--advertise-client-urls http://172.16.20.23:2379 \
+--initial-cluster-token etcd-cluster \
+--initial-cluster etcd01=http://172.16.20.22:2380,etcd02=http://172.16.20.28:2380,etcd03=http://172.16.20.30:2380,etcd04=http://172.16.20.23:2380 \
+--initial-cluster-state existing
