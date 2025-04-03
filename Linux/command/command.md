@@ -51,6 +51,7 @@
 ### 7、下载rpm包：
 
     yum install yum-utils -y
+
     yumdownloader 包名
 
 ### 8、awk命令

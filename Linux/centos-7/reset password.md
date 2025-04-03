@@ -26,7 +26,7 @@
 
 ![img_5.png](image/img_5.png)
 
-##3 7、输入 exit 退出 chroot
+### 7、输入 exit 退出 chroot
 
 ![img_6.png](image/img_6.png)
 

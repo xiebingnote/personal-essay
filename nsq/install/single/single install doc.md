@@ -63,6 +63,7 @@
 
     在一个shell服务器上，创建topic，命令如下：
     curl -d 'hello world 1' 'http://172.16.20.23:4151/pub?topic=testtopic'
+
     如下图所示：
 
 ![img-7.png](image/img-7.png)
@@ -89,6 +90,7 @@
 ![img-10.png](image/img-10.png)
 
     也可在页面查看，输入地址：http://172.16.23.46:4171，如下图所示：
+
     注：172.16.23.46为启动nsqadmin的地址
 
 ![img-11.png](image/img-11.png)
@@ -121,6 +123,7 @@
 ### (4)卸载
 
     请执行命令：sh uninstall_poc_nsq.sh
+
     执行后输出内容如下：
 
 ![img-14.png](image/img-14.png)

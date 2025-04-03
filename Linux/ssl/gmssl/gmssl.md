@@ -71,8 +71,7 @@
     gmssl x509 -req -days 3650 -sm3 -in ${name_ca}.req -extfile $gmssl_path/apps/openssl.cnf -extensions v3_ca -signkey ${name_ca}.key -out ${name_ca}.cer
     gmssl x509 -in ${name_ca}.cer -text -noout  
     rm -f ${name_ca}.req
-    
-    
+
     echo "-----------------------------Server签名证书----------------------------------"
     # Server签名证书
     ./createkey ${server_sign}

@@ -23,6 +23,7 @@
 ### 解决：
 
     1：在控制台使用iptables命令随便写一条防火墙规则，如：iptables -P OUTPUT ACCEPT
+
     2：使用service iptables save进行保存，默认就保存到了/etc/sysconfig目录下的iptables文件中
 
 ### 如果想开放端口（如：8889）

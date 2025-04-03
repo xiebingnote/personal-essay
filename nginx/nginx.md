@@ -48,6 +48,7 @@
 ### 1.创建 Nginx 运行使用的用户 www：
 
     (1)/usr/sbin/groupadd www
+
     (2)/usr/sbin/useradd -g www www
 
 ### 2.配置nginx.conf ，将/usr/local/webserver/nginx/conf/nginx.conf替换为以下内容:
@@ -133,6 +134,7 @@
 ### 4.启动 Nginx
 
     /usr/local/webserver/nginx/sbin/nginx
+
     注：如果执行启动命令后无输出，需再次执行一次启动命令
 
 ### 5.访问站点：
@@ -146,6 +148,7 @@
 ### 1.制作CA私钥：
 
     openssl genrsa -des3 -out ca.key 2048
+
     注：需输入密码，请自行记下
 
 ### 2.制作CA根证书（公钥）：
@@ -220,6 +223,7 @@
 ### 2.编辑nginx.conf文件
 
     vim nginx.conf
+
     注释或者删除server中的内容，添加如下并保存：
     server {
         listen 80; #监听80端口
