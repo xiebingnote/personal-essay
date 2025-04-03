@@ -14,14 +14,15 @@
 3. Elasticsearch: 包含 Elasticsearch 安装、集群部署、扩容、单节点部署、备份、操作、问题记录等。
 4. Etcd: 包含 Etcd 安装、集群部署、扩容、单节点部署、备份、操作、问题记录等。
 5. Git: 包含 Git 常用命令、Git 仓库管理、Git 分支管理、Git 合并、Git 回滚等。
-6. Kafka: 包含 Kafka 安装、集群部署、单节点部署。
-7. Kibana: 包含 Kibana 安装、配置、使用等。
-8. MongoDB: MongoDB 使用记录。
-9. MySQL: 包含 MySQL 使用、数据库备份、操作、问题记录等。
-10. Nginx: 包含 Linux + Nginx 安装配置https 使用记录。
-11. Nsq: 包含 Nsq 安装、集群部署、扩容、单节点部署、备份、操作、问题记录等。
-12. PostgreSQL: 包含 PostgreSQL 使用记录。
-13. Wireshark: Wireshark 相关记录。
+6. Golang：包含 Golang 常用库、工具、问题记录等。
+7. Kafka: 包含 Kafka 安装、集群部署、单节点部署。
+8. Kibana: 包含 Kibana 安装、配置、使用等。
+9. MongoDB: MongoDB 使用记录。
+10. MySQL: 包含 MySQL 使用、数据库备份、操作、问题记录等。
+11. Nginx: 包含 Linux + Nginx 安装配置https 使用记录。
+12. Nsq: 包含 Nsq 安装、集群部署、扩容、单节点部署、备份、操作、问题记录等。
+13. PostgreSQL: 包含 PostgreSQL 使用记录。
+14. Wireshark: Wireshark 相关记录。
 
 ## 2. 项目结构
 
@@ -53,6 +54,8 @@
     │ │ └── single      # etcd 单节点部署
     │ └── record note   # etcd 备份、操作、问题记录
     ├── git             # git 目录
+    ├── golang          # golang 相关库
+    │ └── tools         # go 第三方工具库
     ├── kafka           # kafka 
     │ └── install       # kafka 安装目录
     ├── kibana          # kibana 目录
