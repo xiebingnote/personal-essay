@@ -1,0 +1,31 @@
+source:
+  type: mysql
+  hostname: 172.20.0.2
+  port: 3306
+  username: root
+  password: 123456
+  tables: test.cdc_table
+  tables.exclude: information_schema\.*
+  server-id: 1
+  server-time-zone: UTC
+  scan.startup.mode: initial
+#  scan.startup.mode: latest-offset
+
+sink:
+  type: starrocks
+  name: StarRocks Sink
+  jdbc-url: jdbc:mysql://172.20.0.7:9030
+  load-url: 172.20.0.7:8080
+  username: root
+  password: ""
+#  table.create.properties.replication_num: 1
+#  sink.buffer-flush.interval-ms: 1000
+
+#route:
+#  - source-table: test.cdc_table
+#    sink-table: test.cdc_table
+
+pipeline:
+  name: Sync MySQL Database to StarRocks
+  parallelism: 2
+

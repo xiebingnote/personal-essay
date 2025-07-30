@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  jobmanager:
+    image: flink:1.19.3
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+    ports:
+      - "8082:8081"  # Flink Web UI
+    command: jobmanager
+    networks:
+      - flink-net
+    deploy:
+      replicas: 1
+    hostname: jobmanager
+    restart: always
+
+  taskmanager:
+    image: flink:1.19.3
+    expose:
+      - "6121"
+      - "6122"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+    command: taskmanager
+    networks:
+      - flink-net
+    depends_on:
+      - jobmanager
+    deploy:
+      replicas: 3  # 你可以根据需要调整 TaskManager 数量
+    restart: always
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: test
+    ports:
+      - "3307:3306"
+    networks:
+      - flink-net
+
+  StarRocks:
+    image: starrocks/allin1-ubuntu:3.2.6
+    ports:
+      - "8080:8080"
+      - "9030:9030"
+    networks:
+      - flink-net
+
+networks:
+  flink-net:
+    driver: bridge
