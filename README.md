@@ -23,10 +23,12 @@
 12. Nsq: 包含 Nsq 安装、集群部署、扩容、单节点部署、备份、操作、问题记录等。
 13. PostgreSQL: 包含 PostgreSQL 使用记录。
 14. Wireshark: Wireshark 相关记录。
+15. 钉钉机器人接入代码实现。
 
 ## 2. 项目结构
 
     .
+    ├── ding_ robot     # 钉钉机器人接入代码实现
     ├── Linux           # Linux 目录
     │ ├── centos-7      # 开机重置密码和yum源替换
     │ ├── chrony        # 配置chrony时间同步
