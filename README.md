@@ -28,7 +28,7 @@
 ## 2. 项目结构
 
     .
-    ├── ding_ robot     # 钉钉机器人接入代码实现
+    ├── ding_robot     # 钉钉机器人接入代码实现
     ├── Linux           # Linux 目录
     │ ├── centos-7      # 开机重置密码和yum源替换
     │ ├── chrony        # 配置chrony时间同步

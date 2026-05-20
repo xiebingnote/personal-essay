@@ -1,0 +1,42 @@
+services:
+  master:
+    image: apache/seatunnel:2.3.13
+    container_name: seatunnel_master
+    network_mode: host
+    environment:
+      - ST_DOCKER_MEMBER_LIST=127.0.0.1:5801
+    entrypoint: |
+      /bin/sh -c '
+      sed -i "s/port: 8080/port: 18080/" /opt/seatunnel/config/seatunnel.yaml
+      cat >/opt/seatunnel/config/hazelcast-client.yaml <<EOF
+      hazelcast-client:
+        cluster-name: seatunnel
+        properties:
+          hazelcast.logging.type: log4j2
+        network:
+          cluster-members:
+            - 127.0.0.1:5801
+      EOF
+      exec /opt/seatunnel/bin/seatunnel-cluster.sh -r master
+      '
+  starrocks:
+    image: starrocks/allin1-ubuntu
+    container_name: starrocks_allin1
+    environment:
+      - STARROCKS_FE_PROPERTIES_priority_networks=172.16.0.10/32
+      - STARROCKS_BE_PROPERTIES_priority_networks=172.16.0.10/32
+    entrypoint:
+      - /bin/bash
+      - -lc
+      - |
+        set -e
+        sed -i 's/priority_networks = 127.0.0.1\/32/priority_networks = 172.16.0.10\/32/g' /data/deploy/entrypoint.sh
+        sed -i 's/MYHOST=127.0.0.1/MYHOST=172.16.0.10/g' /data/deploy/starrocks/director/run.sh
+        cd /data/deploy
+        exec /usr/bin/tini-static -- ./entrypoint.sh
+    ports:
+      - "9030:9030"
+      - "8030:8030"
+      - "8040:8040"
+      - "9060:9060"
+    network_mode: host

@@ -1,0 +1,125 @@
+version: '3.8'
+
+services:
+  master:
+    image: apache/seatunnel:2.3.13
+    container_name: seatunnel_master
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /Users/xc/GolandProjects/ad/conf:/opt/seatunnel/conf
+    environment:
+      - ST_DOCKER_MEMBER_LIST=172.16.0.2:5801,172.16.0.3:5801,172.16.0.4:5801
+    entrypoint: |
+      /bin/sh -c '
+      cat >/opt/seatunnel/config/hazelcast-client.yaml <<EOF
+      hazelcast-client:
+        cluster-name: seatunnel
+        properties:
+          hazelcast.logging.type: log4j2
+        network:
+          cluster-members:
+            - 172.16.0.2:5801
+            - 172.16.0.3:5801
+            - 172.16.0.4:5801
+      EOF
+      exec /opt/seatunnel/bin/seatunnel-cluster.sh -r master
+      '
+    ports:
+      - "5801:5801"
+      - "8080:8080"
+      - "8081:8081"
+    networks:
+      seatunnel_network:
+        ipv4_address: 172.16.0.2
+
+  worker1:
+    image: apache/seatunnel:2.3.13
+    container_name: seatunnel_worker_1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - ST_DOCKER_MEMBER_LIST=172.16.0.2:5801,172.16.0.3:5801,172.16.0.4:5801
+    entrypoint: >
+      /bin/sh -c "
+      /opt/seatunnel/bin/seatunnel-cluster.sh -r worker
+      "
+    depends_on:
+      - master
+    networks:
+      seatunnel_network:
+        ipv4_address: 172.16.0.3
+
+  worker2:
+    image: apache/seatunnel:2.3.13
+    container_name: seatunnel_worker_2
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - ST_DOCKER_MEMBER_LIST=172.16.0.2:5801,172.16.0.3:5801,172.16.0.4:5801
+    entrypoint: >
+      /bin/sh -c "
+      /opt/seatunnel/bin/seatunnel-cluster.sh -r worker
+      "
+    depends_on:
+      - master
+    networks:
+      seatunnel_network:
+        ipv4_address: 172.16.0.4
+
+  starrocks:
+    image: starrocks/allin1-ubuntu
+    container_name: starrocks_allin1
+    environment:
+      - STARROCKS_FE_PROPERTIES_priority_networks=172.16.0.10/32
+      - STARROCKS_BE_PROPERTIES_priority_networks=172.16.0.10/32
+    entrypoint:
+      - /bin/bash
+      - -lc
+      - |
+        set -e
+        sed -i 's/priority_networks = 127.0.0.1\/32/priority_networks = 172.16.0.10\/32/g' /data/deploy/entrypoint.sh
+        sed -i 's/MYHOST=127.0.0.1/MYHOST=172.16.0.10/g' /data/deploy/starrocks/director/run.sh
+        cd /data/deploy
+        exec /usr/bin/tini-static -- ./entrypoint.sh
+    ports:
+      - "9030:9030"
+      - "8030:8030"
+      - "8040:8040"
+      - "9060:9060"
+      - "9050:9050"
+    networks:
+      seatunnel_network:
+        ipv4_address: 172.16.0.10
+
+  starrocks1:
+    image: starrocks/allin1-ubuntu
+    container_name: starrocks_allin2
+    environment:
+      - STARROCKS_FE_PROPERTIES_priority_networks=172.16.0.11/32
+      - STARROCKS_BE_PROPERTIES_priority_networks=172.16.0.11/32
+    entrypoint:
+      - /bin/bash
+      - -lc
+      - |
+        set -e
+        sed -i 's/priority_networks = 127.0.0.1\/32/priority_networks = 172.16.0.11\/32/g' /data/deploy/entrypoint.sh
+        sed -i 's/MYHOST=127.0.0.1/MYHOST=172.16.0.11/g' /data/deploy/starrocks/director/run.sh
+        cd /data/deploy
+        exec /usr/bin/tini-static -- ./entrypoint.sh
+    ports:
+      - "9031:9030"
+      - "8031:8030"
+      - "8041:8040"
+      - "9061:9060"
+      - "9051:9050"
+    networks:
+      seatunnel_network:
+        ipv4_address: 172.16.0.11
+
+networks:
+  seatunnel_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/24
